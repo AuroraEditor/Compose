@@ -31,6 +31,10 @@ We ❤️ all contributions, big and small!
 
 This project was created by [Nanashi Li](https://github.com/nanashili) for usage by [AuroraEditor](https://github.com/AuroraEditor/AuroraEditor) and future Aurora projects that require A/B Testing.
 
+Compose was open source due to our belief of having and open, secure and fair eco-system of products for developers. 
+
+This project was not meant to replace fully developed `A/B Testing` software like `Firebase Remote Config` but more for developers that want to get away from big corprate companies that track their data.
+
 ## License
 
 This project uses the MIT license. Compose will always be free.
