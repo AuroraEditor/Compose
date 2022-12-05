@@ -1,0 +1,54 @@
+# Docker Compose file for Compose API
+#
+# Learn more: https://docs.docker.com/compose/reference/
+#
+#   Build images: docker-compose build
+#      Start app: docker-compose up app
+# Start database: docker-compose up db
+# Run migrations: docker-compose run migrate
+#       Stop all: docker-compose down (add -v to wipe db)
+#
+version: '3.7'
+
+volumes:
+  db_data:
+
+x-shared_environment: &shared_environment
+  LOG_LEVEL: ${LOG_LEVEL:-debug}
+  MONGODB: ${MONGODB}
+  JWT_KEY: ${JWT_KEY}
+  SITE_API_URL: ${SITE_API_URL}
+  NO_REPLY_EMAIL: ${NO_REPLY_EMAIL}
+  SITE_FRONTEND_URL: ${SITE_FRONTEND_URL}
+  SMPT2GO_API: ${SMPT2GO_API}
+  GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
+  
+services:
+  app:
+    image: auroracompany/compose:latest
+    build:
+      context: .
+    environment:
+      <<: *shared_environment
+    ports:
+      - '8081:8081'
+    # user: '0' # uncomment to run as root for testing purposes even though Dockerfile defines 'vapor' user.
+    command: ["serve", "--env", "production", "--hostname", "0.0.0.0", "--port", "8081"]
+  nginx:
+    image: nginx:1.15-alpine
+    ports:
+      - 80:80
+      - 443:443
+    restart: unless-stopped
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - ./data/certbot/conf:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
