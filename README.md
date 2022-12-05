@@ -18,13 +18,18 @@ We want to give all companies and users the flexibility, privacy friendly and po
 - Automated email alerts when A/B tests become significant
 - Managed Cloud Hosting by Aurora
 
-## Setup with Docker Compose
+## Setting up Compose
 
-Setting up with docker compose and SSL coming soon.
+* [The Back-End](https://github.com/AuroraEditor/Compose/tree/main/Back-End)
+* [The Front-End](https://github.com/AuroraEditor/Compose/tree/main/Front-End)
 
 ## Contributors
 
 We ❤️ all contributions, big and small!
+
+## Project Creator
+
+This project was created by [Nanashi Li](https://github.com/nanashili)
 
 ## License
 
