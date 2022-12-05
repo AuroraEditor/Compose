@@ -29,7 +29,7 @@ We ❤️ all contributions, big and small!
 
 ## Project Creator
 
-This project was created by [Nanashi Li](https://github.com/nanashili)
+This project was created by [Nanashi Li](https://github.com/nanashili) for usage by [AuroraEditor](https://github.com/AuroraEditor/AuroraEditor) and future Aurora projects that require A/B Testing.
 
 ## License
 
