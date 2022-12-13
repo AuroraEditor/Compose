@@ -1,10 +1,8 @@
-// swift-tools-version: 5.7
-// The swift-tools-version declares the minimum version of Swift required to build this package.
-
+// swift-tools-version:5.6.3
 import PackageDescription
 
 let package = Package(
-    name: "Compose",
+    name: "compose",
     platforms: [
        .macOS(.v12)
     ],
@@ -23,7 +21,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Compose",
+            name: "App",
             dependencies: [
                 .product(name: "Fluent", package: "fluent"),
                 .product(name: "FluentMongoDriver", package: "fluent-mongo-driver"),
@@ -42,7 +40,7 @@ let package = Package(
                 .unsafeFlags(["-cross-module-optimization"], .when(configuration: .release))
             ]
         ),
-        .executableTarget(name: "Run", dependencies: [.target(name: "Compose")]),
+        .executableTarget(name: "Run", dependencies: [.target(name: "App")]),
         .testTarget(name: "AppTests", dependencies: [
             .target(name: "App"),
             .product(name: "XCTVapor", package: "vapor"),
